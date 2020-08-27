@@ -21,7 +21,7 @@ public class UserController {
 	UserRepository userRepository;
 
 	@PostMapping("/users")
-	public ResponseEntity<User> createTutorial(@RequestBody User user) {
+	public ResponseEntity<User> createUser(@RequestBody User user) {
 		try {
 			User _user = userRepository.save(new User(user.getDni(), user.getFirstName(), user.getLastName(),
 					user.getEmail(), user.getDateBirth(), user.getStateUser(), user.getTypeUser(), user.getServices()));
