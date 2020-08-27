@@ -29,9 +29,8 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(String id, String dni, String firstName, String lastName, String email, Date dateBirth,
-			StateUser stateUser, TypeUser typeUser, List<Service> services) {
-		this.id = id;
+	public User(String dni, String firstName, String lastName, String email, Date dateBirth, StateUser stateUser,
+			TypeUser typeUser, List<Service> services) {
 		this.dni = dni;
 		this.firstName = firstName;
 		this.lastName = lastName;
