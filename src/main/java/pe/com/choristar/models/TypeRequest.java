@@ -8,6 +8,9 @@ public class TypeRequest {
         this.request = request;
     }
 
+    public TypeRequest() {
+    }
+
     public String getRequest() {
         return request;
     }
