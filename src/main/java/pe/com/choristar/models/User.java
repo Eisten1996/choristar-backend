@@ -3,6 +3,7 @@ package pe.com.choristar.models;
 import java.util.Date;
 import java.util.List;
 
+import com.mongodb.lang.Nullable;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -23,6 +24,7 @@ public class User {
 	private Date dateBirth;
 	private StateUser stateUser;
 	private TypeUser typeUser;
+	@Nullable
 	private List<Service> services;
 
 	public User() {
