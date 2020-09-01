@@ -3,26 +3,25 @@ package pe.com.choristar.models;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
-@Document("Clain")
+@Document("Claim")
 public class Claim {
     @Id
     private String id;
 
     private Date dateClaim;
     private TypeClaim typeClaim;
-    @DBRef
-    private User user;
+    private ObjectId user;
     private String stateClaim;
 
-
-    public Claim(Date dateClaim, TypeClaim typeClaim, User user, String stateClaim) {
-        dateClaim = dateClaim;
+    public Claim(Date dateClaim, TypeClaim typeClaim, ObjectId user, String stateClaim) {
+        this.dateClaim = dateClaim;
         this.typeClaim = typeClaim;
         this.user = user;
         this.stateClaim = stateClaim;
@@ -41,7 +40,7 @@ public class Claim {
     }
 
     public void setDateClaim(Date dateClaim) {
-        dateClaim = dateClaim;
+        this.dateClaim = dateClaim;
     }
 
     public TypeClaim getTypeClaim() {
@@ -52,11 +51,11 @@ public class Claim {
         this.typeClaim = typeClaim;
     }
 
-    public User getUser() {
+    public ObjectId getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(ObjectId user) {
         this.user = user;
     }
 
@@ -64,7 +63,7 @@ public class Claim {
         return stateClaim;
     }
 
-    public void setstateClaim(String stateClaim) {
+    public void setStateClaim(String stateClaim) {
         this.stateClaim = stateClaim;
     }
 

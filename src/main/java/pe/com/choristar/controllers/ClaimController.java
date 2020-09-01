@@ -13,8 +13,8 @@ import pe.com.choristar.repositories.UserRepository;
 
 @RestController
 @CrossOrigin("http://localhost:8080")
-@RequestMapping("/api2")
-public class ClainController {
+@RequestMapping("/api")
+public class ClaimController {
 
     Logger logger = LoggerFactory.getLogger(ClaimRepository.class);
     @Autowired
@@ -25,10 +25,11 @@ public class ClainController {
     @PostMapping("/claim/{dni}")
     public ResponseEntity<Claim> createUser(@PathVariable String dni, @RequestBody Claim claim) {
         User user = userRepository.findByDni(dni);
-        claim.setUser(user);
+        claim.setUser(user.getId());
         logger.info(user.toString());
         try {
             Claim _claim = claimRepository.save(new Claim(claim.getDateClaim(), claim.getTypeClaim(), claim.getUser(), claim.getStateClaim()));
+
             return new ResponseEntity<>(_claim, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
