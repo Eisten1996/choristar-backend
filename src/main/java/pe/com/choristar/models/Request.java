@@ -3,9 +3,7 @@ package pe.com.choristar.models;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -17,13 +15,13 @@ public class Request {
 
     private Date dateRequest;
     private TypeRequest typeRequest;
-    private ObjectId user;
+    private String user;
     private String stateRequest;
 
     public Request() {
     }
 
-    public Request(Date dateRequest, TypeRequest typeRequest, ObjectId user, String stateRequest) {
+    public Request(Date dateRequest, TypeRequest typeRequest, String user, String stateRequest) {
         this.dateRequest = dateRequest;
         this.typeRequest = typeRequest;
         this.user = user;
@@ -54,11 +52,11 @@ public class Request {
         this.typeRequest = typeRequest;
     }
 
-    public ObjectId getUser() {
+    public String getUser() {
         return user;
     }
 
-    public void setUser(ObjectId user) {
+    public void setUser(String user) {
         this.user = user;
     }
 

@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.com.choristar.models.Request;
-import pe.com.choristar.models.User;
 import pe.com.choristar.repositories.ClaimRepository;
 import pe.com.choristar.repositories.RequestRepository;
 import pe.com.choristar.repositories.UserRepository;

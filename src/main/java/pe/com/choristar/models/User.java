@@ -1,22 +1,20 @@
 package pe.com.choristar.models;
 
-import java.util.Date;
-import java.util.List;
-
-import com.mongodb.lang.Nullable;
-import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.mongodb.lang.Nullable;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.Date;
+import java.util.List;
 
 @Document(collection = "Users")
 public class User {
 
     @Id
-    private ObjectId id;
+    private String id;
 
     private String dni;
     private String firstName;
@@ -44,11 +42,11 @@ public class User {
         this.services = services;
     }
 
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
 

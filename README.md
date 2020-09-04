@@ -4,7 +4,7 @@ agregacion de datos por postman
 http://localhost:8080/api/users
 metodo post
 - Agregar User
-````
+```
 {
     "dni": "123456",
     "firstName": "Eisten",
@@ -32,7 +32,8 @@ metodo post
     ]
 }
 ```
-http://localhost:8080/api/claim/123456
+
+http://localhost:8080/api/claim/71755575
 - Agregar Claim
 
 ```
@@ -45,7 +46,7 @@ http://localhost:8080/api/claim/123456
 }
 ```
 
-http://localhost:8080/api/request/123456
+http://localhost:8080/api/request/71755575
 - Agregar Request
 
 ```
