@@ -1,9 +1,9 @@
 choristar-backend
 
 agregacion de datos por postman
+- Agregar User
 http://localhost:8080/api/users
 metodo post
-- Agregar User
 ```
 {
     "dni": "123456",
@@ -32,9 +32,8 @@ metodo post
     ]
 }
 ```
-
-http://localhost:8080/api/claim/71755575
 - Agregar Claim
+http://localhost:8080/api/claim/71755575
 
 ```
 {
@@ -45,9 +44,8 @@ http://localhost:8080/api/claim/71755575
     "stateClaim":"En proceso"
 }
 ```
-
-http://localhost:8080/api/request/71755575
 - Agregar Request
+http://localhost:8080/api/request/71755575
 
 ```
 {
@@ -58,3 +56,8 @@ http://localhost:8080/api/request/71755575
     "stateClaim":"En proceso"
 }
 ```
+- Obtener usuario por dni
+http://localhost:8080/api/user?dni=71755575
+
+- Obtener usuario por id
+http://localhost:8080/api/user/5f51962dbaa21c09ba8a4549
