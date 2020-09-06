@@ -20,6 +20,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
+    private String password;
     private Date dateBirth;
     private StateUser stateUser;
     private TypeUser typeUser;
@@ -30,12 +31,13 @@ public class User {
         // TODO Auto-generated constructor stub
     }
 
-    public User(String dni, String firstName, String lastName, String email, Date dateBirth, StateUser stateUser,
+    public User(String dni, String firstName, String lastName, String email, String password, Date dateBirth, StateUser stateUser,
                 TypeUser typeUser, List<Service> services) {
         this.dni = dni;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.password = password;
         this.dateBirth = dateBirth;
         this.stateUser = stateUser;
         this.typeUser = typeUser;
@@ -112,6 +114,14 @@ public class User {
 
     public void setServices(List<Service> services) {
         this.services = services;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String toString() {

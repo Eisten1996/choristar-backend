@@ -10,6 +10,8 @@ import pe.com.choristar.models.User;
 import pe.com.choristar.repositories.ClaimRepository;
 import pe.com.choristar.repositories.RequestRepository;
 import pe.com.choristar.repositories.UserRepository;
+import pe.com.choristar.services.IUserService;
+import pe.com.choristar.services.UserServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,11 +28,13 @@ public class UserController {
     ClaimRepository claimRepository;
     @Autowired
     RequestRepository requestRepository;
+    @Autowired
+    IUserService userService;
 
     @PostMapping("/user")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         try {
-            User _user = userRepository.save(new User(user.getDni(), user.getFirstName(), user.getLastName(),
+            User _user = userService.saveUser(new User(user.getDni(), user.getFirstName(), user.getPassword(), user.getLastName(),
                     user.getEmail(), user.getDateBirth(), user.getStateUser(), user.getTypeUser(), user.getServices()));
             return new ResponseEntity<>(_user, HttpStatus.CREATED);
         } catch (Exception e) {
@@ -101,6 +105,7 @@ public class UserController {
             _user.setFirstName(user.getFirstName());
             _user.setLastName(user.getLastName());
             _user.setEmail(user.getEmail());
+            _user.setPassword(user.getPassword());
             _user.setDateBirth(user.getDateBirth());
             _user.setTypeUser(user.getTypeUser());
             _user.setStateUser(user.getStateUser());

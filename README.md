@@ -6,10 +6,11 @@ http://localhost:8080/api/user
 metodo post
 ```
 {
-    "dni": "123456",
+    "dni": "71755575",
     "firstName": "Eisten",
     "lastName": "Flores",
-    "email": "esiten@gmail.com",
+    "email": "eisten@gmail.com",
+    "password": "123456",
     "dateBirth": "1996-08-13",
     "stateUser": {
         "nameUser": "al dia",
