@@ -2,7 +2,7 @@ choristar-backend
 
 agregacion de datos por postman
 - Agregar User
-http://localhost:8080/api/users
+http://localhost:8080/api/user
 metodo post
 ```
 {

@@ -4,7 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.com.choristar.models.Claim;
+import pe.com.choristar.models.Request;
 import pe.com.choristar.models.User;
+import pe.com.choristar.repositories.ClaimRepository;
+import pe.com.choristar.repositories.RequestRepository;
 import pe.com.choristar.repositories.UserRepository;
 
 import java.util.ArrayList;
@@ -18,8 +22,12 @@ public class UserController {
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    ClaimRepository claimRepository;
+    @Autowired
+    RequestRepository requestRepository;
 
-    @PostMapping("/users")
+    @PostMapping("/user")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         try {
             User _user = userRepository.save(new User(user.getDni(), user.getFirstName(), user.getLastName(),
@@ -63,6 +71,24 @@ public class UserController {
             return new ResponseEntity<>(user, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/user/{id}")
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") String id) {
+        try {
+            userRepository.deleteById(id);
+            List<Claim> claim = claimRepository.findByUser(id);
+            List<Request> requests = requestRepository.findByUser(id);
+            if (!claim.isEmpty()) {
+                claimRepository.deleteAll(claim);
+            }
+            if (!requests.isEmpty()) {
+                requestRepository.deleteAll(requests);
+            }
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
