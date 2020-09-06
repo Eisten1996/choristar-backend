@@ -92,4 +92,21 @@ public class UserController {
         }
     }
 
+    @PutMapping("/user/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable("id") String id, @RequestBody User user) {
+        Optional<User> userData = userRepository.findById(id);
+        if (userData.isPresent()) {
+            User _user = userData.get();
+            _user.setDni(user.getDni());
+            _user.setFirstName(user.getFirstName());
+            _user.setLastName(user.getLastName());
+            _user.setEmail(user.getEmail());
+            _user.setDateBirth(user.getDateBirth());
+            _user.setTypeUser(user.getTypeUser());
+            _user.setStateUser(user.getStateUser());
+            return new ResponseEntity<>(userRepository.save(_user), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }
