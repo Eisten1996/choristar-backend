@@ -32,7 +32,7 @@ public class UserController {
 
     @PostMapping("/user")
     public ResponseEntity<User> createUser(@RequestBody User user) {
-        if (!userService.existDni(user.getDni()) && !userService.existEmail(user.getEmail())) {
+        if (userService.existDni(user.getDni()) && userService.existEmail(user.getEmail())) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         try {
