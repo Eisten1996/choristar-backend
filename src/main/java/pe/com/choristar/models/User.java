@@ -27,7 +27,6 @@ public class User {
     private Date dateBirth;
     private StateUser stateUser;
     private TypeUser typeUser;
-    @Nullable
     private List<Service> services;
 
     public User() {
