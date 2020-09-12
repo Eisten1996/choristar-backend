@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.mongodb.lang.Nullable;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -16,9 +17,11 @@ public class User {
     @Id
     private String id;
 
+    @Indexed(unique=true)
     private String dni;
     private String firstName;
     private String lastName;
+    @Indexed(unique=true)
     private String email;
     private String password;
     private Date dateBirth;
