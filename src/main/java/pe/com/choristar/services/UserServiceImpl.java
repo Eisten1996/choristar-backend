@@ -19,4 +19,20 @@ public class UserServiceImpl implements IUserService {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
+
+    public boolean existDni(String dni) {
+        if (userRepository.findByDni(dni) == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean existEmail(String email) {
+        if (userRepository.findByEmail(email) == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }

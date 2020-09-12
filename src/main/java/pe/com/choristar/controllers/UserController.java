@@ -11,7 +11,6 @@ import pe.com.choristar.repositories.ClaimRepository;
 import pe.com.choristar.repositories.RequestRepository;
 import pe.com.choristar.repositories.UserRepository;
 import pe.com.choristar.services.IUserService;
-import pe.com.choristar.services.UserServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +32,9 @@ public class UserController {
 
     @PostMapping("/user")
     public ResponseEntity<User> createUser(@RequestBody User user) {
+        if (!userService.existDni(user.getDni()) && !userService.existEmail(user.getEmail())) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
         try {
             User _user = userService.saveUser(new User(user.getDni(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword(),
                     user.getDateBirth(), user.getStateUser(), user.getTypeUser(), user.getServices()));

@@ -8,5 +8,6 @@ import pe.com.choristar.models.User;
 public interface UserRepository extends MongoRepository<User, String> {
 
     public User findByDni(String dni);
+    public User findByEmail(String dni);
 
 }

@@ -6,4 +6,8 @@ public interface IUserService {
 
 
     public User saveUser(User user);
+
+    public boolean existDni(String dni);
+
+    public boolean existEmail(String email);
 }
