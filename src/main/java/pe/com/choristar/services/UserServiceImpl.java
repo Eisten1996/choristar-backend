@@ -51,6 +51,12 @@ public class UserServiceImpl implements IUserService {
     }
 
     public User login(String email, String password) {
-        return userRepository.findByEmailAndPassword(email, password);
+        User user = userRepository.findByEmailAndPassword(email, password);
+        if (user.getTypeUser().getNameTypeUser().equalsIgnoreCase("Administrador")) {
+            return user;
+        } else {
+            return null;
+        }
+
     }
 }
