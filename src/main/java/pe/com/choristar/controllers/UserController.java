@@ -48,7 +48,7 @@ public class UserController {
     public ResponseEntity<List<User>> getAllUsers() {
         try {
             List<User> users = new ArrayList<>();
-            userRepository.findAll().forEach(users::add);
+            userService.getAllClientes().forEach(users::add);
             if (users.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }

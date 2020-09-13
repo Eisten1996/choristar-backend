@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 import pe.com.choristar.models.User;
 import pe.com.choristar.repositories.UserRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements IUserService {
 
@@ -34,5 +37,16 @@ public class UserServiceImpl implements IUserService {
         } else {
             return true;
         }
+    }
+
+    public List<User> getAllClientes() {
+        List<User> users = new ArrayList<>();
+        for (User u : userRepository.findAll()
+        ) {
+            if (!u.getTypeUser().getNameTypeUser().equalsIgnoreCase("Administrador")) {
+                users.add(u);
+            }
+        }
+        return users;
     }
 }
