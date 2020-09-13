@@ -12,6 +12,7 @@ import pe.com.choristar.repositories.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -37,7 +38,7 @@ public class ClaimController {
         }
     }
 
-    @GetMapping("/claim")
+    @GetMapping("/claims")
     public ResponseEntity<List<Claim>> getAllClaim() {
         try {
             List<Claim> claims = new ArrayList<>();
@@ -48,6 +49,30 @@ public class ClaimController {
             return new ResponseEntity<>(claims, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/claim/{id}")
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") String id) {
+        try {
+            claimRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/claim/{id}")
+    public ResponseEntity<Claim> updateUser(@PathVariable("id") String id, @RequestBody Claim claim) {
+        Optional<Claim> claimData = claimRepository.findById(id);
+        if (claimData.isPresent()) {
+            Claim _claim = claimData.get();
+            _claim.setDateClaim(claim.getDateClaim());
+            _claim.setTypeClaim(claim.getTypeClaim());
+            _claim.setStateClaim(claim.getStateClaim());
+            return new ResponseEntity<>(claimRepository.save(_claim), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }

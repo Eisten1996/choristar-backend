@@ -13,6 +13,7 @@ import pe.com.choristar.repositories.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -39,7 +40,7 @@ public class RequestController {
         }
     }
 
-    @GetMapping("/request")
+    @GetMapping("/requests")
     public ResponseEntity<List<Request>> getAllRequest() {
         try {
             List<Request> requests = new ArrayList<>();
@@ -50,6 +51,30 @@ public class RequestController {
             return new ResponseEntity<>(requests, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/request/{id}")
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") String id) {
+        try {
+            requestRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/request/{id}")
+    public ResponseEntity<Request> updateUser(@PathVariable("id") String id, @RequestBody Request request) {
+        Optional<Request> requestData = requestRepository.findById(id);
+        if (requestData.isPresent()) {
+            Request _request = requestData.get();
+            _request.setDateRequest(request.getDateRequest());
+            _request.setTypeRequest(request.getTypeRequest());
+            _request.setStateRequest(request.getStateRequest());
+            return new ResponseEntity<>(requestRepository.save(_request), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }
