@@ -18,8 +18,8 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public User saveUser(User user) {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+//        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+//        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
@@ -48,5 +48,9 @@ public class UserServiceImpl implements IUserService {
             }
         }
         return users;
+    }
+
+    public User login(String email, String password) {
+        return userRepository.findByEmailAndPassword(email, password);
     }
 }

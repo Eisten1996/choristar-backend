@@ -14,4 +14,6 @@ public interface IUserService {
     public boolean existEmail(String email);
 
     public List<User> getAllClientes();
+
+    public User login(String email,String password);
 }

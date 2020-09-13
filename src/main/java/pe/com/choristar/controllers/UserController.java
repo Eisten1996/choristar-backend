@@ -116,4 +116,15 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("/user/login")
+    public ResponseEntity<User> logingAdmin(@RequestBody User user) {
+        User userLogin = userService.login(user.getEmail(), user.getPassword());
+
+        if (userLogin != null) {
+            return new ResponseEntity<>(userLogin, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }
