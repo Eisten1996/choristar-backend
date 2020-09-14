@@ -117,9 +117,9 @@ public class UserController {
         }
     }
 
-    @GetMapping("/user/login")
-    public ResponseEntity<User> logingAdmin(@RequestBody User user) {
-        User userLogin = userService.login(user.getEmail(), user.getPassword());
+    @GetMapping("/user/login/{email}/{password}")
+    public ResponseEntity<User> logingAdmin(@PathVariable("email") String email, @PathVariable("password") String password) {
+        User userLogin = userService.login(email, password);
 
         if (userLogin != null) {
             return new ResponseEntity<>(userLogin, HttpStatus.OK);
