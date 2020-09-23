@@ -50,7 +50,7 @@ public class RequestController {
     }
 
     @DeleteMapping("/request/{id}")
-    public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") String id) {
+    public ResponseEntity<HttpStatus> deleteRequest(@PathVariable("id") String id) {
         try {
             requestRepository.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -60,7 +60,7 @@ public class RequestController {
     }
 
     @PutMapping("/request/{id}")
-    public ResponseEntity<Request> updateUser(@PathVariable("id") String id, @RequestBody Request request) {
+    public ResponseEntity<Request> updateRequest(@PathVariable("id") String id, @RequestBody Request request) {
         Optional<Request> requestData = requestRepository.findById(id);
         if (requestData.isPresent()) {
             Request _request = requestData.get();

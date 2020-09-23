@@ -49,7 +49,7 @@ public class ClaimController {
     }
 
     @DeleteMapping("/claim/{id}")
-    public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") String id) {
+    public ResponseEntity<HttpStatus> deleteClaim(@PathVariable("id") String id) {
         try {
             claimRepository.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -59,7 +59,7 @@ public class ClaimController {
     }
 
     @PutMapping("/claim/{id}")
-    public ResponseEntity<Claim> updateUser(@PathVariable("id") String id, @RequestBody Claim claim) {
+    public ResponseEntity<Claim> updateClaim(@PathVariable("id") String id, @RequestBody Claim claim) {
         Optional<Claim> claimData = claimRepository.findById(id);
         if (claimData.isPresent()) {
             Claim _claim = claimData.get();
