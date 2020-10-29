@@ -1,13 +1,10 @@
 package pe.com.choristar.controllers;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.com.choristar.models.Request;
-import pe.com.choristar.repositories.ClaimRepository;
 import pe.com.choristar.repositories.RequestRepository;
 import pe.com.choristar.repositories.UserRepository;
 
@@ -20,7 +17,6 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class RequestController {
 
-    Logger logger = LoggerFactory.getLogger(ClaimRepository.class);
     @Autowired
     UserRepository userRepository;
     @Autowired
@@ -30,7 +26,6 @@ public class RequestController {
     public ResponseEntity<Request> createRequest(@PathVariable String dni, @RequestBody Request request) {
 
         request.setUser(userRepository.findByDni(dni).getId());
-        logger.info(userRepository.findByDni(dni).toString());
         try {
             Request _request = requestRepository.save(new Request(request.getDateRequest(), request.getTypeRequest(), request.getUser(), request.getStateRequest()));
 
@@ -55,7 +50,7 @@ public class RequestController {
     }
 
     @DeleteMapping("/request/{id}")
-    public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") String id) {
+    public ResponseEntity<HttpStatus> deleteRequest(@PathVariable("id") String id) {
         try {
             requestRepository.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -65,7 +60,7 @@ public class RequestController {
     }
 
     @PutMapping("/request/{id}")
-    public ResponseEntity<Request> updateUser(@PathVariable("id") String id, @RequestBody Request request) {
+    public ResponseEntity<Request> updateRequest(@PathVariable("id") String id, @RequestBody Request request) {
         Optional<Request> requestData = requestRepository.findById(id);
         if (requestData.isPresent()) {
             Request _request = requestData.get();

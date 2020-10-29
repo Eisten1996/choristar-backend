@@ -1,7 +1,5 @@
 package pe.com.choristar.controllers;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +17,6 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class ClaimController {
 
-    Logger logger = LoggerFactory.getLogger(ClaimRepository.class);
     @Autowired
     UserRepository userRepository;
     @Autowired
@@ -28,7 +25,6 @@ public class ClaimController {
     @PostMapping("/claim/{dni}")
     public ResponseEntity<Claim> createClaim(@PathVariable String dni, @RequestBody Claim claim) {
         claim.setUser(userRepository.findByDni(dni).getId());
-        logger.info(userRepository.findByDni(dni).toString());
         try {
             Claim _claim = claimRepository.save(new Claim(claim.getDateClaim(), claim.getTypeClaim(), claim.getUser(), claim.getStateClaim()));
 
@@ -53,7 +49,7 @@ public class ClaimController {
     }
 
     @DeleteMapping("/claim/{id}")
-    public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") String id) {
+    public ResponseEntity<HttpStatus> deleteClaim(@PathVariable("id") String id) {
         try {
             claimRepository.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -63,7 +59,7 @@ public class ClaimController {
     }
 
     @PutMapping("/claim/{id}")
-    public ResponseEntity<Claim> updateUser(@PathVariable("id") String id, @RequestBody Claim claim) {
+    public ResponseEntity<Claim> updateClaim(@PathVariable("id") String id, @RequestBody Claim claim) {
         Optional<Claim> claimData = claimRepository.findById(id);
         if (claimData.isPresent()) {
             Claim _claim = claimData.get();
