@@ -34,7 +34,7 @@ public class ClaimController {
         }
     }
 
-    @GetMapping("/allClaims")
+    @GetMapping("/claims")
     public ResponseEntity<List<Claim>> getAllClaim() {
         try {
             List<Claim> claims = new ArrayList<>();
